@@ -1,0 +1,14 @@
+{
+  "name": "anu-cli",
+  "version": "1.0.0",
+  "description": "anujs的脚手架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin":{
+    "anu-cli": "index.js"
+  },
+  "author": "RubyLouvre",
+  "license": "ISC"
+}
