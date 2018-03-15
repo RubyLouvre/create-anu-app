@@ -49,5 +49,6 @@ function buildProject(projectName, supportIE) {
         } else {
             console.log(`创建${projectName}目录成功！`)
         }
+        console.log("还没有完工呢！欢迎PR")
     })
 }
