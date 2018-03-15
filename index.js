@@ -4,7 +4,7 @@ const readline = require('readline');
 const json = require('./package.json');
 const fs = require('fs');
 const fse = require('fs-extra');
-
+var Promise = require("bluebird"),
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -51,4 +51,10 @@ function buildProject(projectName, supportIE) {
         }
         console.log("还没有完工呢！欢迎PR")
     })
+}
+
+
+function generateStructure(demoDir, project) {
+    return Promise.promisifyAll(fse).copyAsync(__dirname + '/' + demoDir,
+     project, { clobber: true })
 }
