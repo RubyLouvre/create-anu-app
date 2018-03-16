@@ -3,70 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-     <script type='text/javascript' src="./dist/React.js"></script>
-   <!-- <script type='text/javascript' src="./test/react.js"></script>
-    <script type='text/javascript' src="./test/react-dom.js"></script>-->
-    <script src="test/babel.js"></script>
 </head>
 
 <body>
-    <div id="test"></div>
+    <div id="app"></div>
     <div id="content"></div>
+    <script type='text/javascript' src="./dist/bundle.js"></script>
 </body>
-<script type="text/babel">
-    var container = document.getElementById("test");
-    var expect = function(a) {
-        return {
-            toBe: function(b) {
-                console.log(a,"vs", b, a === b)
-            },
-            toEqual(b){
-                console.log(a,"vs", b, a +""=== b+"")
-            },
-            toThrow(b){
-                try{
-                    a()
-                }catch(e){
-                    console.log(e,"vs", b, e.message +""=== b+"")
-                }
-            }
-        }
-    }
-    class Child extends React.Component {
-          constructor(props) {
-            super(props);
-          }
-          render() {
-            console.log(this.props.value);
-            return null;
-          }
-        }
-    
-        function Wrapper(props) {
-          return <Child {...props} ref={props.forwardedRef} />;
-        }
-    
-        const RefForwardingComponent = React.forwardRef((props, ref) => (
-          <Wrapper {...props} forwardedRef={ref} />
-        ));
-    
-        let setRefCount = 0;
-        let ref;
-    
-        const setRef = r => {
-          setRefCount++;
-          ref = r;
-        };
-    
-
-    ReactDOM.render(<RefForwardingComponent ref={setRef} value={123} />,container);
-  console.log(ref)
-  expect(ref instanceof Child).toBe(true);
-        expect(setRefCount).toBe(1);
-
-    ReactDOM.render(<RefForwardingComponent ref={setRef} value={456} />,container);
-    expect(ref instanceof Child).toBe(true);
-        expect(setRefCount).toBe(1);
-</script>
 
 </html>
