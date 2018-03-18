@@ -6,13 +6,17 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  'mode': 'development',
   module: {
     rules: [
-      { test: /\.js$/, use: 'babel-loader',exclude: /node_modules/ }
+      { test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules|vendor|bootstrap/
+      }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: [ '.js', '.jsx'],
     alias: {
       react: 'anujs',
       'react-dom': 'anujs'

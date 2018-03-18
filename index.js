@@ -59,6 +59,7 @@ function buildProject (pathName, supportIE) {
           }else {
             console.log('当前执行路径', process.cwd(), pathName)
             let configuration = require(path.resolve(pathName, './webpack.config.js'))
+            console.log("configuration",configuration)
             webpack(configuration, function (err, stats) {
               console.log('执行完webpack',err, stats)
             })
