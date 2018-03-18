@@ -8,7 +8,6 @@ const webpack = require('webpack'); // 访问 webpack 运行时(runtime)
 const cliPath = process.cwd()
 const json = require('./package.json')
 
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -45,6 +44,7 @@ switch (args) {
           rl.close()
         }
       }).on('close', () => {
+        console.log(`创建${projectName}目录。。。`)
         buildProject(path.resolve(cliPath, projectName), ie)
         process.exit(0)
       })
@@ -55,24 +55,27 @@ switch (args) {
 }
 
 function buildProject (pathName, supportIE) {
+
   fse.ensureDir(pathName, function (error) {
     if (error) {
       catchError(error)
     } else {
-      //将模板工程anu-demo, 复制到新项目中
+      console.log(`拷贝模板工程。。。`)
+      // 将模板工程anu-demo, 复制到新项目中
       fse.copy(__dirname + '/anu-demo', pathName).then(() => {
         process.chdir(pathName)
-        //执行npm i
+        // 执行npm i
+        console.log(`执行 npm i。。。`)
         cp.exec('npm i', {cwd: pathName}, function (error, stdout, stderr) {
           if (error) {
             catchError(error)
           }else {
-            //执行 webpack 
+            // 执行 webpack 
+            console.log(`执行 webpack。。。`)
             let configuration = require(path.resolve(pathName, './webpack.config.js'))
             webpack(configuration, function (err, stats) {
-              console.log('执行完webpack',err, stats)
+              console.log('完工，打开浏览器')
             })
-            
           }
         }).on('close', function (code) {
           if (code !== 0) {
