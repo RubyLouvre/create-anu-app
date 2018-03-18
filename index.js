@@ -62,11 +62,11 @@ function buildProject (pathName, supportIE) {
     } else {
       console.log(`拷贝模板工程。。。`)
       // 将模板工程anu-demo, 复制到新项目中
-      fse.copy(__dirname + '/anu-demo', pathName).then(() => {
+       fse.copy(__dirname + '/anu-demo', pathName).then(() => {
         process.chdir(pathName)
         // 执行npm i
         console.log(`执行 npm i。。。`)
-        cp.exec('npm i', {cwd: pathName}, function (error, stdout, stderr) {
+       var npm = cp.exec('npm i', {cwd: pathName,stdio: "inherit"}, function (error, stdout, stderr) {
           if (error) {
             catchError(error)
           }else {
@@ -77,7 +77,11 @@ function buildProject (pathName, supportIE) {
               console.log('完工，打开浏览器')
             })
           }
-        }).on('close', function (code) {
+        })
+        npm.stdout.on("data", function(data){
+           console.log("输出 "+ data)
+        })
+        npm.on('close', function (code) {
           if (code !== 0) {
             console.log(`ps 进程退出码：${code}`)
           }
