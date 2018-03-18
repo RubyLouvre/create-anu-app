@@ -1,24 +1,32 @@
 #!/usr/bin/env node
 const readline = require('readline')
-const json = require('./package.json')
 const fs = require('fs')
 const fse = require('fs-extra')
 const path = require('path')
 const cp = require('child_process')
+const webpack = require('webpack'); // 访问 webpack 运行时(runtime)
+const cliPath = process.cwd()
+const json = require('./package.json')
+
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
-const webpack = require('webpack'); // 访问 webpack 运行时(runtime)
 
-const cliPath = process.cwd()
+function catchError (err) {
+  if (err) return console.error(err)
+}
 
 console.log('欢迎使用anu!!!!')
 var args = process.argv.slice(2)
 switch (args) {
   case '-h':
-    console.log('输出答案')
+    console.log(`
+      -h  提问
+      -v  版本号
+      projectName --ie  输入项目名，及可选的旧式IE支持，正式建立项目
+    `)
     break
   case '-v':
     console.log('当前版本是' + json.version)
@@ -51,40 +59,28 @@ function buildProject (pathName, supportIE) {
     if (error) {
       catchError(error)
     } else {
+      //将模板工程anu-demo, 复制到新项目中
       fse.copy(__dirname + '/anu-demo', pathName).then(() => {
         process.chdir(pathName)
+        //执行npm i
         cp.exec('npm i', {cwd: pathName}, function (error, stdout, stderr) {
           if (error) {
             catchError(error)
           }else {
-            console.log('当前执行路径', process.cwd(), pathName)
+            //执行 webpack 
             let configuration = require(path.resolve(pathName, './webpack.config.js'))
-            console.log("configuration",configuration)
             webpack(configuration, function (err, stats) {
               console.log('执行完webpack',err, stats)
             })
-          /*
-           cp.exec('webpack', {cwd: pathName}, function (error, stdout, stderr) {
-             if (error) {
-               catchError(error)
-             }else {
-               console.log('执行完webpack')
-             }
-           })
-           */
+            
           }
         }).on('close', function (code) {
           if (code !== 0) {
             console.log(`ps 进程退出码：${code}`)
-          }else {
-            catchError('搞定')
           }
         })
       })
         .catch(catchError)
     }
   })
-}
-function catchError (err) {
-  if (err) return console.error(err)
 }
