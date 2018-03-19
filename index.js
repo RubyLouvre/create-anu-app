@@ -65,8 +65,8 @@ function buildProject (pathName, supportIE) {
        fse.copy(__dirname + '/anu-demo', pathName).then(() => {
         process.chdir(pathName)
         // 执行npm i
-        console.log(`执行 npm i。。。`)
-       var npm = cp.exec('npm i', {cwd: pathName,stdio: "inherit"}, function (error, stdout, stderr) {
+        console.log(`执行 yarn install。。。`)
+       var npm = cp.exec('yarn', {cwd: pathName,stdio: "inherit"}, function (error, stdout, stderr) {
           if (error) {
             catchError(error)
           }else {

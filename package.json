@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "fs-extra": "^5.0.0",
-    "webpack": "^4.0.0-beta.3",
-    "webpack-cli": "^2.0.12"
-  }
+    "webpack": "^4.0.0-beta.3"
+    }
 }

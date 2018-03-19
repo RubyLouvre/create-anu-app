@@ -1,4 +1,10 @@
 {
-    "presets": ["react"],
-    "plugins": ["syntax-dynamic-import"]
-  }
+    "presets": [
+        "env",
+        "react",
+        "stage-0"
+    ],
+    "plugins": [
+        "syntax-dynamic-import"
+    ]
+}
