@@ -1,5 +1,6 @@
 import React, { Compoent } from "react";
 import ReactDOM from "react-dom";
+import { Loading } from "./Loading";
 
 
 class Child extends React.Component {
@@ -13,7 +14,7 @@ class Child extends React.Component {
 }
 
 function Wrapper(props) {
-    return <Child {...props} ref={props.forwardedRef} />;
+    return (<div><Loading /><Child {...props} ref={props.forwardedRef} /></div>)
 }
 
 const RefForwardingComponent = React.forwardRef((props, ref) => (
