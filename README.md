@@ -1,14 +1,15 @@
 # create-anu-app
+
 anujs的官方脚手架
 
 安装（还没有发到npm上去，请不要急。心急先用npm link）
-```
-npm i create-anu-app -g
+```javascript
+yarn global add create-anu-app
 ```
 
 使用
 
-```
+```javascript
 create-anu-app projectName --ie 
 // 第一个参数是项目名， 第二是支持IE8，可选
 create-anu-app projectName
