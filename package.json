@@ -1,5 +1,5 @@
 {
-  "name": "anu-cli2",
+  "name": "create-anu-app",
   "version": "1.0.0",
   "description": "anujs的脚手架",
   "main": "index.js",
@@ -7,16 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "anu": "index.js"
+    "create-anu-app": "index.js"
   },
   "author": "RubyLouvre",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.1"
-  },
-  "devDependencies": {
+    "bluebird": "^3.5.1",
     "fs-extra": "^5.0.0",
     "webpack": "^4.0.0-beta.3",
     "webpack-dev-server": "^3.1.1"
-    }
+  }
 }
