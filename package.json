@@ -1,6 +1,6 @@
 {
   "name": "create-anu-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "anujs的脚手架",
   "main": "index.js",
   "scripts": {
